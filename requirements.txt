@@ -11,11 +11,11 @@ python-multipart==0.0.6
 # sqlite3-utils==3.35
 
 # Document Processing
-pymupdf==1.23.8
+pymupdf
 python-docx==1.1.0
 
 # Text Processing and NLP
-sentence-transformers==2.2.2
+sentence-transformers
 
 # Vector Database
 chromadb==0.4.18

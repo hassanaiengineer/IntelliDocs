@@ -35,13 +35,27 @@ class Settings(BaseSettings):
     HEADER_API_KEY: str = "X-API-Key"
     HEADER_PROVIDER: str = "X-Provider"
     
+    # Server Settings
+    HOST: str = "0.0.0.0"
+    PORT: int = 8000
+    WORKERS: int = 1
+    RELOAD: bool = False
+    
     # Supported LLM Providers
     SUPPORTED_PROVIDERS: list = ["openai", "gemini", "anthropic"]
     DEFAULT_PROVIDER: str = "openai"
     
+    # Security & Logging
+    SECRET_KEY: str = "your-secret-key-here"
+    ALLOWED_ORIGINS: list = ["*"]
+    LOG_LEVEL: str = "info"
+    LOG_FILE: str = "logs/rag.log"
+    DEBUG: bool = False
+    
     class Config:
         env_file = ".env"
         case_sensitive = True
+        extra = "ignore"
 
 @lru_cache()
 def get_settings():
