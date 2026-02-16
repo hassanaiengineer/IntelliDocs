@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliDocs - AI Document Intelligence Platform</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/welcome.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'serif': ['Crimson Text', 'serif'],
+                    },
+                    colors: {
+                        'obsidian': '#1a1a2e',
+                        'midnight': '#16213e',
+                        'electric': '#0f3460',
+                        'ocean': '#16537e',
+                        'amber': '#e94560',
+                        'pearl': '#f5f5f5',
+                        'sage': '#2d5016',
+                        'moss': '#3d7c47'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-obsidian via-midnight to-electric min-h-screen font-serif text-pearl overflow-x-hidden">
+    <!-- Animated Background Grid -->
+    <div class="fixed inset-0 opacity-10 pointer-events-none">
+        <div class="absolute inset-0 grid-pattern animate-pulse-slow"></div>
+    </div>
+    
+    <!-- Floating Orbs -->
+    <div class="floating-orb orb-1"></div>
+    <div class="floating-orb orb-2"></div>
+    <div class="floating-orb orb-3"></div>
+    
+    <!-- Main Container -->
+    <div class="relative min-h-screen flex items-center justify-center px-4 py-8">
+        <div class="glass-morphism max-w-2xl w-full mx-auto p-12 text-center space-y-8 backdrop-blur-xl">
+            <!-- Header Section -->
+            <div class="space-y-4 reveal-animation" style="animation-delay: 0.2s">
+                <!-- Logo/Icon -->
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-amber to-ocean shadow-xl shadow-amber/20 border border-pearl/10 mb-6">
+                    <svg class="w-10 h-10 text-pearl" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                </div>
+                
+                <!-- Title -->
+                <h1 class="text-5xl md:text-6xl font-serif font-semibold text-transparent bg-clip-text bg-gradient-to-r from-pearl via-amber to-ocean leading-tight">
+                    IntelliDocs
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="text-xl text-pearl/80 font-light italic">
+                    Transform documents into intelligent conversations
+                </p>
+            </div>
+            
+            <!-- Feature Highlights -->
+            <div class="grid md:grid-cols-3 gap-6 py-8 reveal-animation" style="animation-delay: 0.4s">
+                <div class="feature-card group">
+                    <div class="feature-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-mono text-sm font-medium text-amber">Smart Upload</h3>
+                    <p class="text-xs text-pearl/70">PDF & Word documents processed with AI precision</p>
+                </div>
+                
+                <div class="feature-card group">
+                    <div class="feature-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-mono text-sm font-medium text-amber">Natural Chat</h3>
+                    <p class="text-xs text-pearl/70">Ask questions as if talking to an expert</p>
+                </div>
+                
+                <div class="feature-card group">
+                    <div class="feature-icon">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-mono text-sm font-medium text-amber">Instant Answers</h3>
+                    <p class="text-xs text-pearl/70">Get insights from your documents instantly</p>
+                </div>
+            </div>
+            
+            <!-- Welcome Form -->
+            <div class="space-y-6 reveal-animation" style="animation-delay: 0.6s">
+                <div class="text-left space-y-3">
+                    <label class="block text-amber font-mono text-sm font-medium tracking-wide">
+                        What should we call you?
+                    </label>
+                    <input 
+                        id="username" 
+                        type="text" 
+                        placeholder="Enter your name"
+                        class="w-full px-6 py-4 bg-pearl/10 border border-pearl/20 rounded-xl text-pearl placeholder-pearl/50 font-serif text-lg focus:outline-none focus:ring-2 focus:ring-amber/50 focus:border-amber/50 transition-all duration-300 backdrop-blur-sm"
+                        autocomplete="off"
+                        maxlength="50"
+                    />
+                </div>
+                
+                <button 
+                    onclick="proceedToAuth()"
+                    disabled
+                    id="continueBtn"
+                    class="w-full btn-primary group disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    <span class="font-mono text-sm font-medium tracking-wider">Continue to Setup</span>
+                    <svg class="w-4 h-4 ml-2 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+                
+                <p class="text-xs text-pearl/60 font-mono">
+                    Your session is secure and temporary • No data is stored permanently
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="absolute bottom-0 w-full p-6 text-center">
+        <p class="text-pearl/40 text-xs font-mono">
+            Enhanced RAG System • Powered by AI • 
+            <span class="text-amber">Built by : Hassan Khan | AI Engineer | hassanaiengineer@gmail.com</span>
+        </p>
+    </footer>
+    
+    <script src="/static/js/welcome.js"></script>
+</body>
+</html>

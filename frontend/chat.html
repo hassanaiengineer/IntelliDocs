@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - IntelliDocs AI Platform</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/chat.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'mono': ['JetBrains Mono', 'monospace'],
+                        'serif': ['Crimson Text', 'serif'],
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'obsidian': '#1a1a2e',
+                        'midnight': '#16213e', 
+                        'electric': '#0f3460',
+                        'ocean': '#16537e',
+                        'amber': '#e94560',
+                        'pearl': '#f5f5f5',
+                        'sage': '#2d5016',
+                        'moss': '#3d7c47'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-to-br from-obsidian via-midnight to-electric min-h-screen font-sans text-pearl">
+    <!-- Header -->
+    <header class="border-b border-pearl/10 bg-obsidian/50 backdrop-blur-xl sticky top-0 z-50">
+        <div class="flex items-center justify-between px-6 py-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-r from-amber to-ocean flex items-center justify-center shadow-lg">
+                    <svg class="w-5 h-5 text-pearl" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-serif font-semibold text-pearl">IntelliDocs</h1>
+                    <p class="text-xs text-pearl/60 font-mono" id="sessionInfo">Chat Interface</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-3">
+                    <div class="text-right">
+                        <p class="text-sm text-amber font-medium" id="userName">User</p>
+                        <p class="text-xs text-pearl/60 font-mono" id="providerInfo">Provider: Unknown</p>
+                    </div>
+                    <div class="w-8 h-8 rounded-full bg-amber/20 flex items-center justify-center">
+                        <span class="text-xs font-mono font-semibold text-amber" id="userInitial">U</span>
+                    </div>
+                </div>
+                
+                <button 
+                    onclick="showSettings()"
+                    class="p-2 rounded-xl bg-pearl/10 hover:bg-pearl/20 transition-colors"
+                    title="Settings"
+                >
+                    <svg class="w-5 h-5 text-pearl/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="flex h-[calc(100vh-80px)]">
+        <!-- Left Sidebar - File Management -->
+        <aside class="w-80 border-r border-pearl/10 bg-obsidian/30 backdrop-blur-xl flex flex-col">
+            <!-- Upload Section -->
+            <div class="p-6 border-b border-pearl/10">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-lg font-serif font-semibold text-pearl">Documents</h2>
+                        <div class="file-counter">
+                            <span id="fileCount">0</span><span class="text-pearl/60">/4</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-xs text-pearl/60 leading-relaxed">
+                        Upload up to 4 documents (PDF or DOCX). Files are added progressively - your existing documents remain intact when you add new ones.
+                    </p>
+                    
+                    <!-- Upload Drop Zone -->
+                    <div 
+                        id="dropZone"
+                        class="upload-dropzone group"
+                    >
+                        <div class="text-center space-y-3">
+                            <div class="upload-icon">
+                                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-pearl">Drop files here</p>
+                                <p class="text-xs text-pearl/60">or <span class="text-amber cursor-pointer">browse</span></p>
+                            </div>
+                        </div>
+                        
+                        <input 
+                            type="file" 
+                            id="fileInput" 
+                            multiple 
+                            accept=".pdf,.docx,.doc"
+                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        />
+                    </div>
+                    
+                    <!-- Upload Progress -->
+                    <div id="uploadProgress" class="hidden">
+                        <div class="flex items-center justify-between text-xs text-pearl/80 mb-2">
+                            <span id="uploadStatus">Uploading...</span>
+                            <span id="uploadPercentage">0%</span>
+                        </div>
+                        <div class="upload-progress-bar">
+                            <div id="uploadProgressFill" class="upload-progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Files List -->
+            <div class="flex-1 overflow-y-auto">
+                <div id="filesList" class="p-4 space-y-3">
+                    <div id="emptyState" class="text-center py-12">
+                        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-pearl/5 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-pearl/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <p class="text-sm text-pearl/60">No documents uploaded</p>
+                        <p class="text-xs text-pearl/40 mt-1">Upload your first document to get started</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Actions -->
+            <div class="p-4 border-t border-pearl/10 space-y-2">
+                <button 
+                    id="clearAllBtn" 
+                    class="w-full btn-secondary text-xs py-2 disabled:opacity-50"
+                    disabled
+                >
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                    Clear All Documents
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="flex-1 flex flex-col">
+            <!-- Chat Messages -->
+            <div id="chatContainer" class="flex-1 overflow-y-auto p-6 space-y-6">
+                <div id="welcomeMessage" class="text-center py-12">
+                    <div class="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-r from-amber to-ocean flex items-center justify-center shadow-xl">
+                        <svg class="w-10 h-10 text-pearl" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-serif font-semibold text-pearl mb-3">Ready to Chat</h3>
+                    <p class="text-pearl/70 max-w-md mx-auto mb-6">Upload documents and start asking questions. I'll provide intelligent answers based on your uploaded content.</p>
+                    
+                    <div class="flex items-center justify-center space-x-6 text-sm text-pearl/60">
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 rounded-full bg-moss"></div>
+                            <span>Session Active</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 rounded-full bg-amber"></div>
+                            <span id="questionCount">0/50 Questions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="border-t border-pearl/10 bg-obsidian/30 backdrop-blur-xl p-6">
+                <div class="max-w-4xl mx-auto">
+                    <div class="flex items-end space-x-4">
+                        <div class="flex-1 relative">
+                            <textarea 
+                                id="chatInput"
+                                placeholder="Ask a question about your documents..."
+                                class="w-full px-6 py-4 bg-pearl/10 border border-pearl/20 rounded-2xl text-pearl placeholder-pearl/50 font-sans resize-none focus:outline-none focus:ring-2 focus:ring-amber/50 focus:border-amber/50 transition-all duration-300 min-h-[60px] max-h-32"
+                                rows="1"
+                                disabled
+                            ></textarea>
+                            
+                            <!-- Character counter -->
+                            <div class="absolute bottom-2 right-4 text-xs text-pearl/40 font-mono">
+                                <span id="charCounter">0</span>/500
+                            </div>
+                        </div>
+                        
+                        <button 
+                            id="sendBtn"
+                            class="btn-primary px-6 py-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled
+                        >
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <div class="flex items-center justify-between mt-3 text-xs text-pearl/60">
+                        <div class="flex items-center space-x-4">
+                            <span>Press <kbd class="kbd">Enter</kbd> to send</span>
+                            <span>Press <kbd class="kbd">Shift+Enter</kbd> for new line</span>
+                        </div>
+                        <div id="inputHint" class="hidden text-amber">Upload documents to start chatting</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="fixed inset-0 bg-obsidian/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="glass-morphism max-w-md w-full mx-4 p-6 space-y-4">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-serif font-semibold text-pearl">Settings</h3>
+                <button onclick="hideSettings()" class="p-1 rounded-lg hover:bg-pearl/10 transition-colors">
+                    <svg class="w-5 h-5 text-pearl/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="space-y-4 text-sm">
+                <div class="flex items-center justify-between py-2 border-b border-pearl/10">
+                    <span class="text-pearl/80">Session ID</span>
+                    <span class="font-mono text-pearl/60" id="sessionIdDisplay">Loading...</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-pearl/10">
+                    <span class="text-pearl/80">Provider</span>
+                    <span id="providerDisplay" class="text-amber">Unknown</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-pearl/10">
+                    <span class="text-pearl/80">Questions Used</span>
+                    <span id="questionsUsed" class="text-pearl/60">0/50</span>
+                </div>
+                <div class="flex items-center justify-between py-2">
+                    <span class="text-pearl/80">Files Uploaded</span>
+                    <span id="filesUploaded" class="text-pearl/60">0/4</span>
+                </div>
+            </div>
+            
+            <button 
+                onclick="newSession()" 
+                class="w-full btn-secondary py-3 mt-6"
+            >
+                Start New Session
+            </button>
+        </div>
+    </div>
+
+    <script src="/static/js/chat.js"></script>
+</body>
+</html>
