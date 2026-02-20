@@ -6,6 +6,11 @@ A production-ready **Retrieval-Augmented Generation (RAG)** system that transfor
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+![IntelliDocs Home](home.png)
+
+> [!IMPORTANT]
+> **Backend Code Folder**: For production ready backend code folder,Follow on [GitHub](https://github.com/hassanaiengineer) and message me on [LinkedIn](https://www.linkedin.com/in/hassan-khan-4961b722b/) to receive the production-ready backend code.
+
 ## ✨ Features
 
 ### 🎯 **Core Capabilities**
@@ -399,6 +404,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+## 🤝 Let's Connect
+
+If you found this template helpful or want to discuss AI systems, feel free to reach out:
+
+- **📧 Email**: [hassanaiengineer@gmail.com](mailto:hassanaiengineer@gmail.com)
+- **🔗 LinkedIn**: [Hassan Khan](https://www.linkedin.com/in/hassan-khan-4961b722b/)
+
+---
+
 **Built with ❤️ for intelligent document analysis**
 
-For questions, issues, or contributions, please visit our [GitHub repository](https://github.com/your-repo/enhanced-rag).
+For questions, issues, or contributions, please visit our [GitHub repository](https://github.com/hassanaiengineer/IntelliDocs).
